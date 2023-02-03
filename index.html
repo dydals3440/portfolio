@@ -23,7 +23,34 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <!-- html파일이 parsing 되는 동안 js파일 동시에 다운되면서 html parsing 완료된다음에 자바파일 실행-->
     <script src="main.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <!-- Navbar -->
+    <nav id="navbar">
+        <div class="navbar__logo">
+            <i class="fab fa-diaspora"></i>
+            <a href="#">Yongmin</a>
+        </div>
+            <ul class="navbar__menu">
+                <li class="navbar__menu__item">Home</li>
+                <li class="navbar__menu__item">About</li>
+                <li class="navbar__menu__item">Skills</li>
+                <li class="navbar__menu__item">My work</li>
+                <li class="navbar__menu__item">Testimonial</li>
+                <li class="navbar__menu__item">Contact</li>
+            </ul>
+        </div>
+    </nav>
+    <!-- About -->
+    <section id="about"></section>
+    <!-- Skills -->
+    <section id="skills"></section>
+    <!-- Work -->
+    <section id="work"></section>
+    <!-- Testimonials -->
+    <section id="testimonials"></section>
+    <!-- contact -->
+    <section id="contact"></section>
 </html>
