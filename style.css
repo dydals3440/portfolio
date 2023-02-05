@@ -394,13 +394,16 @@ p {
   color: var(--color-white);
 }
 
+/* 가상 요소 선택자!! */
+/* https://goddino.tistory.com/43 */
 /* 이름과 설명 사이에 선 긋기(일일이 html 하나씩 선 추가할 필요 x) */
-.project__description h3:after {
+.project__description h3::after {
   content: " ";
   width: 25px;
   height: 2px;
   background-color: var(--color-dark-white);
   display: block;
+  /* left right 가능할려면 relative로 변경 */
   position: relative;
   left: 50%;
   margin-left: -12px;
@@ -409,4 +412,50 @@ p {
 
 .project:hover .project__description {
   opacity: 1;
+}
+
+/* Testimonials */
+#testimonials {
+  background-color: var(--color-light-white);
+}
+
+.testimonials {
+  margin: 40px;
+}
+
+.testimonial {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 32px 0px;
+}
+
+.testimonial__avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 12px;
+}
+
+.testimonial__avatar:nth-child(odd) {
+  margin-right: 40px;
+}
+
+.testimonial__avatar:nth-child(even) {
+  margin-left: 40px;
+}
+
+.testimonial__speach-bubble {
+  padding: 18px;
+  background-color: var(--color-white);
+  border-radius: var(--size-border-radius);
+}
+
+.testimonial__speach-bubble p {
+  color: var(--color-light-grey);
+}
+
+.testimonial__speach-bubble a {
+  color: var(--color-pink);
 }
