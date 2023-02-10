@@ -138,6 +138,16 @@ p {
   background-color: var(--color-dark-pink);
 }
 
+.navbar__toggle-btn {
+  position: absolute;
+  right: 32px;
+  font-size: 24px;
+  color: var(--color-white);
+  /* 평소에는 보여주면 안되니 (창이 작아질때만 보여질것) */
+  /* opacity로 할경우는 마우스 클릭이 됨; */
+  display: none;
+}
+
 /* Home */
 #home {
   background: url("./imgs/home-background.png") center/cover no-repeat;
@@ -485,4 +495,42 @@ p {
   transform: scale(1.1);
   transition: all var(--animation-duration) ease-in;
   color: var(--color-yellow);
+}
+
+/* For below 768px screen width */
+@media screen and (max-width: 768px) {
+  .navbar__toggle-btn {
+    display: block;
+  }
+  #navbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .navbar__menu {
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    display: none;
+  }
+
+  .about__majors {
+    flex-direction: column;
+    margin-bottom: 38px;
+  }
+
+  .skillset {
+    flex-direction: column;
+  }
+
+  .project {
+    /* 화면을 매꿔주는 것 */
+    flex-grow: 1;
+  }
+
+  .testimonial__avatar {
+    width: 80px;
+    height: 80px;
+  }
 }
