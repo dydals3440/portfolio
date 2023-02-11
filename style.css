@@ -93,13 +93,22 @@ p {
 /* Navbar */
 /* Navbar안에 박가 2개 있는데 양쪽에 나올 수 있도록 flex 설정 */
 #navbar {
-  background-color: var(--color-pink);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   color: var(--color-white);
   padding: 16px;
+  /* make transparent navbar */
+  background-color: transparent;
+  position: fixed;
+  width: 100%;
+  transition: all var(--animation-duration) ease-in-out;
+}
+
+#navbar.navbar--dark {
+  background-color: var(--color-pink);
+  padding: 8px;
 }
 
 .navbar__menu {
@@ -153,6 +162,7 @@ p {
   background: url("./imgs/home-background.png") center/cover no-repeat;
   padding: 40px;
   text-align: center;
+  padding-top: 100px;
 }
 
 .home__avatar {
