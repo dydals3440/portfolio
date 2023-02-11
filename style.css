@@ -36,6 +36,8 @@
 /* Universal tags */
 * {
   box-sizing: border-box;
+  /* 버튼 클릭해서 해당 위치로 이동할시 제목이 안보이게 */
+  scroll-margin-top: 100px;
 }
 
 body {
@@ -104,6 +106,7 @@ p {
   position: fixed;
   width: 100%;
   transition: all var(--animation-duration) ease-in-out;
+  /* 무조건 navbar가 맨 위에 있어야 하므로 */
   z-index: 1;
 }
 
