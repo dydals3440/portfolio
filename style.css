@@ -548,3 +548,30 @@ p {
     height: 80px;
   }
 }
+
+/* Scroll */
+.arrow-up {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  font-size: var(--font-large);
+  background-color: var(--color-pink);
+  color: var(--color-white);
+  border: 1px solid var(--color-white);
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
+  line-height: 70px;
+  /* display: none; */
+  opacity: 0;
+  /* 불투명이긴 하지만 실제로 있는 요소이기 떄문에 안보이지만 누르면 이벤트 실행됨 */
+  pointer-events: none;
+  /* display: none을 했을떄 Transition은 정상 작동하지 않는다. */
+  /* display 같은 경우는 완전히 없어졌다 나오는 거기 때문에 애니메이션 x */
+  transition: opacity 300ms ease-in;
+}
+
+.arrow-up.visible {
+  opacity: 1;
+  pointer-events: all;
+}
