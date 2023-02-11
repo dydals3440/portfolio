@@ -56,3 +56,41 @@ document.addEventListener("scroll", () => {
 arrowUp.addEventListener("click", () => {
   scrollIntoView("#home");
 });
+
+// Projects
+const workBtnContainer = document.querySelector(".work__categories");
+const projectContainer = document.querySelector(".work__projects");
+// querySelectorAll을 통해 배열로 모든 프로젝트를 받아옵니다.
+const projects = document.querySelectorAll(".project");
+
+workBtnContainer.addEventListener("click", (e) => {
+  // dataset.filter값이없으면 parentNode의 dataset.filter 값을 확인하겠다. 즉, 숫자버튼을 눌를떄 span태그이기 때문에 undefined 예외 핸들링
+  const filter = e.target.dataset.filter || e.target.parentNode.dataset.filter;
+  // filter가 null이면 아무것도 x
+  if (filter == null) {
+    return;
+  }
+  projectContainer.classList.add("anim-out");
+  setTimeout(() => {
+    projects.forEach((project) => {
+      console.log(project.dataset.type);
+      if (filter === "*" || filter === project.dataset.type) {
+        project.classList.remove("invisible");
+      } else {
+        project.classList.add("invisible");
+      }
+    });
+    projectContainer.classList.remove("anim-out");
+  }, 300);
+  //   console.log(`-----------------`);
+  //   for (let project of projects) {
+  //     console.log(project);
+  //   }
+
+  //   console.log(`-----------------`);
+  //   let project;
+  //   for (let i = 0; i < projects.length; i++) {
+  //     project = projects[i];
+  //     console.log(project);
+  //   }
+});
