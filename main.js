@@ -20,7 +20,14 @@ navbarMenu.addEventListener("click", (event) => {
   if (link === null) {
     return;
   }
+  navbarMenu.classList.remove("open");
   scrollIntoView(link);
+});
+
+// navbar toggle button for small screen
+const navbarToggleBtn = document.querySelector(".navbar__toggle-btn");
+navbarToggleBtn.addEventListener("click", () => {
+  navbarMenu.classList.toggle("open");
 });
 
 // Handle click on "contact me" button on home
@@ -70,10 +77,19 @@ workBtnContainer.addEventListener("click", (e) => {
   if (filter == null) {
     return;
   }
+  // Remove Selection from the previous item and select the new one
+  const active = document.querySelector(".category__btn.selected");
+  active.classList.remove("selected");
+  const target =
+    e.target.nodeName === "BUTTON" ? e.target : e.target.parentNode;
+  target.classList.add("selected");
+  console.log(e.target.nodeName);
+  console.log(e.target);
+  console.log(e.target.parentNode);
+
   projectContainer.classList.add("anim-out");
   setTimeout(() => {
     projects.forEach((project) => {
-      console.log(project.dataset.type);
       if (filter === "*" || filter === project.dataset.type) {
         project.classList.remove("invisible");
       } else {
@@ -82,15 +98,4 @@ workBtnContainer.addEventListener("click", (e) => {
     });
     projectContainer.classList.remove("anim-out");
   }, 300);
-  //   console.log(`-----------------`);
-  //   for (let project of projects) {
-  //     console.log(project);
-  //   }
-
-  //   console.log(`-----------------`);
-  //   let project;
-  //   for (let i = 0; i < projects.length; i++) {
-  //     project = projects[i];
-  //     console.log(project);
-  //   }
 });
