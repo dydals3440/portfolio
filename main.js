@@ -20,6 +20,7 @@ navbarMenu.addEventListener("click", (event) => {
   if (link === null) {
     return;
   }
+  // mobile 환경에서 navbar 원하는 위치 클릭시 스크롤링 되면서 open이라는 속성을 없앰. 보기 편하게
   navbarMenu.classList.remove("open");
   scrollIntoView(link);
 });
@@ -35,12 +36,6 @@ const homeContactBtn = document.querySelector(".home__contact");
 homeContactBtn.addEventListener("click", () => {
   scrollIntoView("#contact");
 });
-
-// 겹치는 부분은 재사용성 위해 함수처리
-function scrollIntoView(selector) {
-  const scrollTo = document.querySelector(selector);
-  scrollTo.scrollIntoView({ behavior: "smooth" });
-}
 
 //  Make home slowly fade to transparent as the window scrolls down
 const home = document.querySelector(".home__container");
@@ -98,4 +93,73 @@ workBtnContainer.addEventListener("click", (e) => {
     });
     projectContainer.classList.remove("anim-out");
   }, 300);
+});
+
+// 1. 모든 섹션 요소들과 메뉴 아이템들을 가지고 온다.
+// 2. IntersectionObserver를 이용해서 모든 섹션들을 관찰한다.
+// 3. 보여지는 섹션에 해당하는 메뉴 아이템을 활성화 시킨다.
+const sectionIds = [
+  "#home",
+  "#about",
+  "#skills",
+  "#work",
+  "#testimonials",
+  "#contact",
+];
+
+// 드림코딩 배열편 확인
+// 문자열을 갖고 있는 배열을 빙글빙글 돌면서 각각의 id를 section dom요소로 변환하는 새로운 배열을 만듬, 배열을 하나하나 돌면서 새로운 배열을 만드는 것은 map을 활용
+const sections = sectionIds.map((id) => document.querySelector(id)); // Array(6) 0: section#home 1:section#about.section.section_container... 등등
+const navItems = sectionIds.map(
+  (id) => document.querySelector(`[data-link="${id}"]`) //Array(6) li.navbar__menu__item.active, 1: li.navbar__menu__item ;;;
+);
+
+let selectedNavIndex = 0;
+let selectedNavItem = navItems[0];
+function selectNavItem(selected) {
+  selectedNavItem.classList.remove("active");
+  selectedNavItem = selected;
+  selectedNavItem.classList.add("active");
+}
+
+// 겹치는 부분은 재사용성 위해 함수처리
+function scrollIntoView(selector) {
+  const scrollTo = document.querySelector(selector);
+  scrollTo.scrollIntoView({ behavior: "smooth" });
+  selectNavItem(navItems[sectionIds.indexOf(selector)]);
+}
+
+const observerOptions = {
+  root: null,
+  rootMargin: "0px",
+  threshold: 0.3,
+};
+
+const observerCallback = (entries, observer) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting && entry.intersectionRatio > 0) {
+      //entry의 타겟은 빠져나가는 섹션
+      const index = sectionIds.indexOf(`#${entry.target.id}`); // [index:1, entry.target.id: 'about']
+      // 스크롤링이 아래로 되어서 페이지가 올라옴, 뒤에 딸아오는 인덱스 선택
+      if (entry.boundingClientRect.y < 0) {
+        selectedNavIndex = index + 1;
+      } else {
+        selectedNavIndex = index - 1;
+      }
+    }
+  });
+};
+const observer = new IntersectionObserver(observerCallback, observerOptions);
+sections.forEach((section) => observer.observe(section));
+
+window.addEventListener("wheel", () => {
+  if (window.scrollY === 0) {
+    selectedNavIndex = 0;
+  } else if (
+    Math.round(window.scrollY + window.innerHeight) >=
+    document.body.clientHeight
+  ) {
+    selectedNavIndex = navItems.length - 1;
+  }
+  selectNavItem(navItems[selectedNavIndex]);
 });

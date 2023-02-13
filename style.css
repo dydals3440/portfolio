@@ -61,6 +61,7 @@ button {
   cursor: pointer;
   border: none;
   outline: none;
+  padding: 0;
 }
 
 /* Typography */
@@ -151,6 +152,10 @@ p {
   background-color: var(--color-dark-pink);
 }
 
+.navbar__menu__item.active {
+  border: 1px solid var(--color-white);
+}
+
 .navbar__toggle-btn {
   position: absolute;
   right: 32px;
@@ -189,6 +194,10 @@ p {
   border: 2px solid var(--color-white);
   border-radius: var(--size-border-radius);
   color: var(--color-white);
+}
+
+.home__contact:hover {
+  background-color: var(--color-orange);
 }
 
 /* Section common */
@@ -336,6 +345,7 @@ p {
   border-radius: var(--size-border-radius);
   font-size: var(--font-regular);
   padding: 8px 48px;
+  position: relative;
 }
 
 .category__btn.selected,
@@ -363,9 +373,9 @@ p {
   /* 중간정렬은 line-height을 현재 높이만큼 적용! */
   line-height: 24px;
   /* 애니메이션 이용 위에서 숫자가 떨어지게 만들어보기 */
-  position: relative;
+  position: absolute;
   top: -20px;
-  left: 4px;
+  right: 16px;
   opacity: 0;
   transition: all var(--animation-duration) ease-in;
 }
@@ -525,6 +535,14 @@ p {
 
 /* For below 768px screen width */
 @media screen and (max-width: 768px) {
+  :root {
+    /* Font size */
+    --font-large: 30px;
+    --font-medium: 18px;
+    --font-regular: 16px;
+    --font-small: 14px;
+    --font-micro: 12px;
+  }
   .navbar__toggle-btn {
     display: block;
   }
@@ -549,20 +567,40 @@ p {
 
   .navbar__toggle-btn {
     cursor: pointer;
-    top: 30px;
+    top: 16px;
+    right: 16px;
+    font-size: var(--font-medium);
   }
 
   #navbar.navbar--dark {
     padding: 16px;
   }
 
+  .section {
+    padding: 16px;
+  }
+
   .about__majors {
     flex-direction: column;
-    margin-bottom: 38px;
+    margin-top: 30px;
+    margin-bottom: 0px;
+  }
+
+  .major {
+    margin-bottom: 30px;
   }
 
   .skillset {
     flex-direction: column;
+  }
+
+  .category__btn {
+    margin: 4px 0;
+    width: 100%;
+  }
+
+  .category__btn.selected .category__count {
+    margin: auto;
   }
 
   .project {
@@ -570,9 +608,38 @@ p {
     flex-grow: 1;
   }
 
+  .testimonial {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   .testimonial__avatar {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
+    /* order: 0; */
+    /* order basis shrink 아이템들에 사용할 수 있는 것 */
+    /* 기본 order는 0 */
+  }
+
+  .testimonial__avatar:nth-child(even),
+  .testimonial__avatar:nth-child(odd) {
+    margin: 0;
+    margin-bottom: 8px;
+  }
+
+  .testimonial__speach-bubble {
+    order: 1;
+  }
+
+  .arrow-up {
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    line-height: 50px;
+    right: 16px;
+    bottom: 16px;
   }
 }
 
